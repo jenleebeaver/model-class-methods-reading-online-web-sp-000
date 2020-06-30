@@ -10,6 +10,14 @@ class Post < ActiveRecord::Base
     #this is asking for posts by author
   end
 
+  def self.from_today
+    where("created_at >=?", Time.zone.today.beginning_of_day)
+  end
+ 
+  def self.old_news
+    where("created_at <?", Time.zone.today.beginning_of_day)
+  end
+
   private
 
   def is_title_case
